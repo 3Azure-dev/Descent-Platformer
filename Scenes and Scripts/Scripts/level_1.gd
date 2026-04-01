@@ -5,6 +5,8 @@ extends Node2D
 @export var platform_spike: PackedScene
 
 var score = 0
+var clean_streak = 0
+
 var platforms_spawned = 0
 var spawn_timer: Timer
 
@@ -94,11 +96,35 @@ func spawn_platform():
 	add_child(new_platform)
 	platforms_spawned += 1
 
-func add_score(amount):
-	score += amount
-	$CanvasLayer/ScoreLabel.text = str(score)
 
 func _on_death_zone_entered(body):
 	if body.name == "Player":
 		# The Godot 4 way: Callable.call_deferred()
 		get_tree().reload_current_scene.call_deferred()
+
+# Called when landing on a platform
+func add_platform_score(base_amount, is_clean):
+	if is_clean:
+		clean_streak += 1
+	else:
+		clean_streak = 0 # Conveyors break the streak!
+		
+	var multiplier = 1.0
+	if clean_streak >= 10:
+		multiplier = 2.0
+	elif clean_streak >= 5:
+		multiplier = 1.5
+		
+	# Apply multiplier and convert to integer
+	var final_points = int(base_amount * multiplier)
+	score += final_points
+	$CanvasLayer/ScoreLabel.text = str(score)
+
+# Called for Near-Misses or escaping Bombs (Flat bonuses, no multiplier)
+func add_bonus_score(amount):
+	score += amount
+	$CanvasLayer/ScoreLabel.text = str(score)
+
+# We will call this later when Abilities are added
+func reset_streak():
+	clean_streak = 0

@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://dsbvjfi6avo0p"]
+
+[ext_resource type="Script" uid="uid://c73662gajrqah" path="res://Scenes and Scripts/Scripts/level_2.gd" id="1_tfj4q"]
+[ext_resource type="PackedScene" uid="uid://b2t0g2yrdj12b" path="res://Scenes and Scripts/Scenes/platform_grating.tscn" id="2_75ny0"]
+[ext_resource type="PackedScene" uid="uid://gqyglq6jwdaw" path="res://Scenes and Scripts/Scenes/platform_bomb.tscn" id="3_28pci"]
+[ext_resource type="PackedScene" uid="uid://c0waqcwpddy8r" path="res://Scenes and Scripts/Scenes/platform_bounce.tscn" id="4_vqlr4"]
+[ext_resource type="Texture2D" uid="uid://x8hf83oatu7v" path="res://Assets/Level 2/Background.png" id="5_75ny0"]
+[ext_resource type="PackedScene" uid="uid://ch064k7fer6hm" path="res://Scenes and Scripts/Scenes/player.tscn" id="6_k6gi3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_505pi"]
+size = Vector2(720, 50)
+
+[node name="Level2" type="Node2D" unique_id=1211338279]
+script = ExtResource("1_tfj4q")
+platform_grating = ExtResource("2_75ny0")
+platform_bomb = ExtResource("3_28pci")
+platform_bounce = ExtResource("4_vqlr4")
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="." unique_id=2138820106]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="BackgroundLayer" unique_id=470295924]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = -128.0
+offset_right = 152.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_75ny0")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1585500652]
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=530649207]
+offset_left = 320.0
+offset_top = -42.0
+offset_right = 393.0
+offset_bottom = 133.0
+theme_override_font_sizes/font_size = 128
+text = "0"
+
+[node name="CeilingZone" type="Area2D" parent="." unique_id=165205849]
+position = Vector2(357, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CeilingZone" unique_id=1013979583]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CeilingZone" unique_id=741381028]
+position = Vector2(0, 24)
+shape = SubResource("RectangleShape2D_505pi")
+
+[node name="VoidZone" type="Area2D" parent="." unique_id=1885269195]
+position = Vector2(363, 1226)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VoidZone" unique_id=430116627]
+position = Vector2(-1, 54)
+shape = SubResource("RectangleShape2D_505pi")
+
+[node name="Player" parent="." unique_id=51943560 instance=ExtResource("6_k6gi3")]
+position = Vector2(360, 200)

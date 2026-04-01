@@ -23,4 +23,5 @@ func _physics_process(delta):
 func _on_score_zone_body_entered(body):
 	if body.name == "Player" and not has_scored:
 		has_scored = true
-		get_tree().current_scene.add_score(1)
+		# Gives +1 point, but BREAKS the streak (false)!
+		get_tree().current_scene.add_platform_score(1, false)

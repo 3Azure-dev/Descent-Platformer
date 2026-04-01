@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://bv72lj3ueemoc"]
+[gd_scene format=3 uid="uid://b2t0g2yrdj12b"]
 
-[ext_resource type="Script" uid="uid://nlmswrpcsumr" path="res://platform_base.gd" id="1_hiv0q"]
-[ext_resource type="Texture2D" uid="uid://bke5dkjs46wsd" path="res://Assets/Level 1/Platform1.png" id="2_avdqm"]
+[ext_resource type="Script" uid="uid://brq2of3276dp" path="res://Scenes and Scripts/Scripts/platform_grating.gd" id="1_gobcc"]
+[ext_resource type="Texture2D" uid="uid://dxyl0in6y1ytq" path="res://Assets/Level 2/Platform1.png" id="2_gobcc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_62k5h"]
 size = Vector2(160, 40)
@@ -9,13 +9,13 @@ size = Vector2(160, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvial"]
 size = Vector2(160, 20)
 
-[node name="Platform_base" type="AnimatableBody2D" unique_id=465887259]
-script = ExtResource("1_hiv0q")
+[node name="Platform_grating" type="AnimatableBody2D" unique_id=465887259]
+script = ExtResource("1_gobcc")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1125734200]
-position = Vector2(-1.66893e-06, -0.50000095)
-scale = Vector2(0.3678161, 0.4141414)
-texture = ExtResource("2_avdqm")
+position = Vector2(-1.66893e-06, 0.43434173)
+scale = Vector2(0.3678161, 0.4005013)
+texture = ExtResource("2_gobcc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=76165687]
 shape = SubResource("RectangleShape2D_62k5h")

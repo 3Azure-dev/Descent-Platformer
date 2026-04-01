@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://gqyglq6jwdaw"]
+
+[ext_resource type="Script" uid="uid://bvk3dyw2oyhgm" path="res://Scenes and Scripts/Scripts/platform_bomb.gd" id="1_0jw5r"]
+[ext_resource type="Texture2D" uid="uid://cxhy32kq61er2" path="res://Assets/Level 2/Platform2.png" id="2_0jw5r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_62k5h"]
+size = Vector2(160, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvial"]
+size = Vector2(160, 20)
+
+[node name="Platform_bomb" type="AnimatableBody2D" unique_id=465887259]
+script = ExtResource("1_0jw5r")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1125734200]
+position = Vector2(3.5762787e-07, -9.020201)
+scale = Vector2(0.35010943, 0.35341218)
+texture = ExtResource("2_0jw5r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=76165687]
+shape = SubResource("RectangleShape2D_62k5h")
+
+[node name="Explosionzone" type="Area2D" parent="CollisionShape2D" unique_id=338106963]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/Explosionzone" unique_id=1602051458]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_cvial")
+
+[connection signal="body_entered" from="CollisionShape2D/Explosionzone" to="." method="_on_score_zone_body_entered"]

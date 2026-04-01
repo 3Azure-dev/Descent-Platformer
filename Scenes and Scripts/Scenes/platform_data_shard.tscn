@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cse2xv0wc3xk6"]
+
+[ext_resource type="Script" uid="uid://biahdlec8st1m" path="res://Scenes and Scripts/Scripts/platform_data_shard.gd" id="1_oibw1"]
+[ext_resource type="Texture2D" uid="uid://m6bp3rn5hl6m" path="res://Assets/Level 3/Platform1.png" id="2_3al6g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_62k5h"]
+size = Vector2(160, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvial"]
+size = Vector2(160, 20)
+
+[node name="Platform_data_shard" type="AnimatableBody2D" unique_id=465887259]
+sync_to_physics = false
+script = ExtResource("1_oibw1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1125734200]
+position = Vector2(-5.841255e-06, -0.5000014)
+scale = Vector2(0.31683168, 0.42708334)
+texture = ExtResource("2_3al6g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=76165687]
+shape = SubResource("RectangleShape2D_62k5h")
+
+[node name="ScoreZone" type="Area2D" parent="CollisionShape2D" unique_id=338106963]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/ScoreZone" unique_id=1602051458]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_cvial")
+
+[connection signal="body_entered" from="CollisionShape2D/ScoreZone" to="." method="_on_score_zone_body_entered"]

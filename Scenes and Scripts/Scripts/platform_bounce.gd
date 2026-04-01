@@ -1,7 +1,8 @@
 extends AnimatableBody2D
 
-var rise_speed = 300.0
+var rise_speed = 150.0
 var has_scored = false
+var bounce_power = 900.0 # Huge launch!
 
 func _physics_process(delta):
 	position.y -= rise_speed * delta
@@ -11,4 +12,8 @@ func _physics_process(delta):
 func _on_score_zone_body_entered(body):
 	if body.name == "Player" and not has_scored:
 		has_scored = true
-		get_tree().current_scene.add_score(1)
+		# Normal +1 score, keeps the streak going!
+		get_tree().current_scene.add_platform_score(1, true)
+			
+		# Launch the player!
+		body.super_bounce(bounce_power)
