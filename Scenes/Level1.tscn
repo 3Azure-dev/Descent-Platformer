@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://dyhm0sg7cra8v"]
+
+[ext_resource type="PackedScene" uid="uid://ch064k7fer6hm" path="res://Scenes/player.tscn" id="1_2llne"]
+[ext_resource type="Script" uid="uid://ceivoosubjus5" path="res://Scenes/level_1.gd" id="1_q12u6"]
+[ext_resource type="PackedScene" uid="uid://bv72lj3ueemoc" path="res://Scenes/platform_base.tscn" id="2_slnnj"]
+[ext_resource type="PackedScene" uid="uid://didm4cbg501tx" path="res://Scenes/platform_conveyer.tscn" id="3_t3or0"]
+[ext_resource type="PackedScene" uid="uid://bfipg3lqsxfgx" path="res://Scenes/platform_spike.tscn" id="4_ysn8j"]
+[ext_resource type="Texture2D" uid="uid://bof3ulvnq2ev2" path="res://Assets/Level 1/Background.png" id="5_t3or0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_505pi"]
+size = Vector2(720, 50)
+
+[node name="Level1" type="Node2D" unique_id=1211338279]
+script = ExtResource("1_q12u6")
+platform_base = ExtResource("2_slnnj")
+platform_conveyor = ExtResource("3_t3or0")
+platform_spike = ExtResource("4_ysn8j")
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="." unique_id=2138820106]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="BackgroundLayer" unique_id=470295924]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = -128.0
+offset_right = 152.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_t3or0")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1585500652]
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=530649207]
+offset_left = 320.0
+offset_top = -42.0
+offset_right = 393.0
+offset_bottom = 133.0
+theme_override_font_sizes/font_size = 128
+text = "0"
+
+[node name="CeilingZone" type="Area2D" parent="." unique_id=165205849]
+position = Vector2(357, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CeilingZone" unique_id=1013979583]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CeilingZone" unique_id=741381028]
+position = Vector2(0, 24)
+shape = SubResource("RectangleShape2D_505pi")
+
+[node name="VoidZone" type="Area2D" parent="." unique_id=1885269195]
+position = Vector2(363, 1226)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VoidZone" unique_id=430116627]
+position = Vector2(-1, 54)
+shape = SubResource("RectangleShape2D_505pi")
+
+[node name="Player" parent="." unique_id=51943560 instance=ExtResource("1_2llne")]
+position = Vector2(360, 200)

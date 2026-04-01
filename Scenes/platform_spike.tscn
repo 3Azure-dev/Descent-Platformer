@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bfipg3lqsxfgx"]
+
+[ext_resource type="Script" uid="uid://ckch0cjns7c45" path="res://Scenes/platform_spike.gd" id="1_5e5nt"]
+[ext_resource type="Texture2D" uid="uid://dgdjqaa5j8evn" path="res://Assets/Level 1/Platform3.png" id="2_ywb7c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_62k5h"]
+size = Vector2(200, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvial"]
+size = Vector2(200, 20)
+
+[node name="Platform_base" type="AnimatableBody2D" unique_id=465887259]
+script = ExtResource("1_5e5nt")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1125734200]
+position = Vector2(-3.5762787e-07, -7)
+scale = Vector2(0.45977008, 0.35526317)
+texture = ExtResource("2_ywb7c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=76165687]
+shape = SubResource("RectangleShape2D_62k5h")
+
+[node name="KillZone" type="Area2D" parent="CollisionShape2D" unique_id=338106963]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/KillZone" unique_id=1602051458]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_cvial")
+
+[connection signal="body_entered" from="CollisionShape2D/KillZone" to="." method="_on_kill_zone_body_entered"]
