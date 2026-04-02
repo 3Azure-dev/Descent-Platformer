@@ -5,7 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://didm4cbg501tx" path="res://Scenes and Scripts/Scenes/platform_conveyer.tscn" id="3_86gk8"]
 [ext_resource type="PackedScene" uid="uid://bfipg3lqsxfgx" path="res://Scenes and Scripts/Scenes/platform_spike.tscn" id="4_wkh4p"]
 [ext_resource type="Texture2D" uid="uid://bof3ulvnq2ev2" path="res://Assets/Level 1/Background.png" id="5_f412u"]
+[ext_resource type="PackedScene" uid="uid://db0ox74tn4fxm" path="res://Scenes and Scripts/Scenes/guide_ramp.tscn" id="5_yhbs5"]
 [ext_resource type="PackedScene" uid="uid://ch064k7fer6hm" path="res://Scenes and Scripts/Scenes/player.tscn" id="6_yb8je"]
+[ext_resource type="Texture2D" uid="uid://irawwjepkc7f" path="res://Assets/Game UI/Ceiling_Spike.png" id="7_wkh4p"]
+[ext_resource type="AudioStream" uid="uid://bnlp52d5t588n" path="res://Assets/Sounds/BG Music.mp3" id="8_86gk8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_505pi"]
 size = Vector2(720, 50)
@@ -15,6 +18,7 @@ script = ExtResource("1_btgov")
 platform_base = ExtResource("2_yhbs5")
 platform_conveyor = ExtResource("3_86gk8")
 platform_spike = ExtResource("4_wkh4p")
+guide_ramp_scene = ExtResource("5_yhbs5")
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="." unique_id=2138820106]
 layer = -1
@@ -36,24 +40,48 @@ stretch_mode = 6
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1585500652]
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=530649207]
-offset_left = 320.0
-offset_top = -42.0
-offset_right = 393.0
-offset_bottom = 133.0
+offset_left = 318.0
+offset_top = 164.0
+offset_right = 391.0
+offset_bottom = 339.0
 theme_override_font_sizes/font_size = 128
 text = "0"
 
+[node name="AbilityButton" type="Button" parent="CanvasLayer" unique_id=1533407371]
+custom_minimum_size = Vector2(150, 150)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -209.0
+offset_top = -199.0
+offset_right = -18.0
+offset_bottom = -49.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Activate 
+Scorestreak"
+
 [node name="CeilingZone" type="Area2D" parent="." unique_id=165205849]
-position = Vector2(357, 0)
+position = Vector2(357, -2)
+scale = Vector2(1.44, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="CeilingZone" unique_id=1013979583]
+position = Vector2(0, 71)
+scale = Vector2(3.5200024, 2.0000005)
+texture = ExtResource("7_wkh4p")
+flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CeilingZone" unique_id=741381028]
-position = Vector2(0, 24)
+position = Vector2(0, 64)
+scale = Vector2(1, 2.52)
 shape = SubResource("RectangleShape2D_505pi")
 
 [node name="VoidZone" type="Area2D" parent="." unique_id=1885269195]
-position = Vector2(363, 1226)
+position = Vector2(363, 1328)
+scale = Vector2(1.44, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VoidZone" unique_id=430116627]
 position = Vector2(-1, 54)
@@ -61,3 +89,9 @@ shape = SubResource("RectangleShape2D_505pi")
 
 [node name="Player" parent="." unique_id=51943560 instance=ExtResource("6_yb8je")]
 position = Vector2(360, 200)
+
+[node name="BGM" type="AudioStreamPlayer2D" parent="." unique_id=1535482281]
+stream = ExtResource("8_86gk8")
+autoplay = true
+
+[connection signal="pressed" from="CanvasLayer/AbilityButton" to="." method="_on_ability_button_pressed"]

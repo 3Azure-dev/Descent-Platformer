@@ -2,6 +2,10 @@
 
 [ext_resource type="Script" uid="uid://drbi3xti6j0r5" path="res://Scenes and Scripts/Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://bbmpym6ydyiwe" path="res://Assets/Player/Player.png" id="2_cvnsp"]
+[ext_resource type="AudioStream" uid="uid://o3t2lwbe6b23" path="res://Assets/Sounds/Land.wav" id="3_2hqiq"]
+[ext_resource type="AudioStream" uid="uid://52qosljm28lq" path="res://Assets/Sounds/Death.wav" id="4_qvyyn"]
+[ext_resource type="AudioStream" uid="uid://c2o5p41v6hrtd" path="res://Assets/Sounds/Star.wav" id="5_2o0o2"]
+[ext_resource type="AudioStream" uid="uid://dc7o53fag4c64" path="res://Assets/Sounds/Spike.mp3" id="6_qvyyn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vgqql"]
 size = Vector2(64, 64)
@@ -17,3 +21,15 @@ texture = ExtResource("2_cvnsp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1172153873]
 shape = SubResource("RectangleShape2D_vgqql")
+
+[node name="SfxLand" type="AudioStreamPlayer2D" parent="." unique_id=733036895]
+stream = ExtResource("3_2hqiq")
+
+[node name="SfxDeath" type="AudioStreamPlayer2D" parent="." unique_id=172098518]
+stream = ExtResource("4_qvyyn")
+
+[node name="SfxAbility" type="AudioStreamPlayer2D" parent="." unique_id=2060259081]
+stream = ExtResource("5_2o0o2")
+
+[node name="SfxDeathSpike" type="AudioStreamPlayer2D" parent="." unique_id=1420840100]
+stream = ExtResource("6_qvyyn")

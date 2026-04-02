@@ -11,14 +11,21 @@ config_version=5
 [application]
 
 config/name="Descent Platformer 2d"
-run/main_scene="uid://dyhm0sg7cra8v"
+run/main_scene="uid://bb7gr47x6aa2n"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*uid://cyd7a1cjv4wcu"
 
 [display]
 
 window/size/viewport_width=720
 window/size/viewport_height=1280
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=1
 
 [physics]
 
@@ -29,3 +36,4 @@ window/size/viewport_height=1280
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true

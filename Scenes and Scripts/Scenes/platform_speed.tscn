@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://duoww4maernvk" path="res://Scenes and Scripts/Scripts/platform_speed.gd" id="1_nsnmq"]
 [ext_resource type="Texture2D" uid="uid://plxoqhdfplek" path="res://Assets/Level 3/Platform3.png" id="2_nsnmq"]
+[ext_resource type="AudioStream" uid="uid://ec8ge2uwlpoy" path="res://Assets/Sounds/SpeedZap.mp3" id="3_q87dn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_62k5h"]
 size = Vector2(160, 40)
@@ -25,5 +26,8 @@ shape = SubResource("RectangleShape2D_62k5h")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/ScoreZone" unique_id=1602051458]
 position = Vector2(0, -24)
 shape = SubResource("RectangleShape2D_cvial")
+
+[node name="SfxSpeed" type="AudioStreamPlayer2D" parent="." unique_id=1529589284]
+stream = ExtResource("3_q87dn")
 
 [connection signal="body_entered" from="CollisionShape2D/ScoreZone" to="." method="_on_score_zone_body_entered"]

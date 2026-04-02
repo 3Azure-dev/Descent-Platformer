@@ -4,10 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://b2t0g2yrdj12b" path="res://Scenes and Scripts/Scenes/platform_grating.tscn" id="2_75ny0"]
 [ext_resource type="PackedScene" uid="uid://gqyglq6jwdaw" path="res://Scenes and Scripts/Scenes/platform_bomb.tscn" id="3_28pci"]
 [ext_resource type="PackedScene" uid="uid://c0waqcwpddy8r" path="res://Scenes and Scripts/Scenes/platform_bounce.tscn" id="4_vqlr4"]
+[ext_resource type="PackedScene" uid="uid://db0ox74tn4fxm" path="res://Scenes and Scripts/Scenes/guide_ramp.tscn" id="5_28pci"]
 [ext_resource type="Texture2D" uid="uid://x8hf83oatu7v" path="res://Assets/Level 2/Background.png" id="5_75ny0"]
 [ext_resource type="PackedScene" uid="uid://ch064k7fer6hm" path="res://Scenes and Scripts/Scenes/player.tscn" id="6_k6gi3"]
+[ext_resource type="Texture2D" uid="uid://irawwjepkc7f" path="res://Assets/Game UI/Ceiling_Spike.png" id="7_ynebs"]
+[ext_resource type="AudioStream" uid="uid://draqld8kso8wp" path="res://Assets/Sounds/TheForge.mp3" id="8_vqlr4"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_505pi"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ynebs"]
+size = Vector2(720, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_avpl0"]
 size = Vector2(720, 50)
 
 [node name="Level2" type="Node2D" unique_id=1211338279]
@@ -15,6 +21,7 @@ script = ExtResource("1_tfj4q")
 platform_grating = ExtResource("2_75ny0")
 platform_bomb = ExtResource("3_28pci")
 platform_bounce = ExtResource("4_vqlr4")
+guide_ramp_scene = ExtResource("5_28pci")
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="." unique_id=2138820106]
 layer = -1
@@ -35,29 +42,57 @@ stretch_mode = 6
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1585500652]
 
-[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=530649207]
-offset_left = 320.0
-offset_top = -42.0
-offset_right = 393.0
-offset_bottom = 133.0
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=239080930]
+offset_left = 318.0
+offset_top = 164.0
+offset_right = 391.0
+offset_bottom = 339.0
 theme_override_font_sizes/font_size = 128
 text = "0"
 
-[node name="CeilingZone" type="Area2D" parent="." unique_id=165205849]
-position = Vector2(357, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="CeilingZone" unique_id=1013979583]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CeilingZone" unique_id=741381028]
-position = Vector2(0, 24)
-shape = SubResource("RectangleShape2D_505pi")
-
-[node name="VoidZone" type="Area2D" parent="." unique_id=1885269195]
-position = Vector2(363, 1226)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="VoidZone" unique_id=430116627]
-position = Vector2(-1, 54)
-shape = SubResource("RectangleShape2D_505pi")
+[node name="AbilityButton" type="Button" parent="CanvasLayer" unique_id=1901598856]
+custom_minimum_size = Vector2(150, 150)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -209.0
+offset_top = -199.0
+offset_right = -18.0
+offset_bottom = -49.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Activate 
+Scorestreak"
 
 [node name="Player" parent="." unique_id=51943560 instance=ExtResource("6_k6gi3")]
 position = Vector2(360, 200)
+
+[node name="BGM" type="AudioStreamPlayer2D" parent="." unique_id=204936278]
+stream = ExtResource("8_vqlr4")
+autoplay = true
+
+[node name="CeilingZone" type="Area2D" parent="." unique_id=2081459996]
+position = Vector2(357, -37)
+scale = Vector2(1.44, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="CeilingZone" unique_id=810217060]
+position = Vector2(0, 71)
+scale = Vector2(3.5200024, 2.0000005)
+texture = ExtResource("7_ynebs")
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CeilingZone" unique_id=2676808]
+position = Vector2(0, 64)
+scale = Vector2(1, 2.52)
+shape = SubResource("RectangleShape2D_ynebs")
+
+[node name="VoidZone" type="Area2D" parent="." unique_id=133997205]
+position = Vector2(363, 1328)
+scale = Vector2(1.44, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VoidZone" unique_id=1527540126]
+position = Vector2(-1, 54)
+shape = SubResource("RectangleShape2D_avpl0")

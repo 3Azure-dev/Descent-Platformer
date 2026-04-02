@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://db0ox74tn4fxm"]
+
+[ext_resource type="Script" uid="uid://bnw48ium4mywv" path="res://Scenes and Scripts/Scripts/guide_ramp.gd" id="1_tdj3s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrd0x"]
+
+[node name="GuideRamp" type="AnimatableBody2D" unique_id=1922873477]
+script = ExtResource("1_tdj3s")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=358586453]
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=820565302]
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_jrd0x")

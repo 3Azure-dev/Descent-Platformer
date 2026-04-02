@@ -3,14 +3,9 @@ extends AnimatableBody2D
 var rise_speed = 150.0
 var has_scored = false
 var is_triggered = false
+var player_node = null # <-- We will use this to track the player!
 
 @onready var sprite = $Sprite2D
-@onready var explosion_zone = $CollisionShape2D/Explosionzone
-@onready var explosion_shape = $CollisionShape2D/Explosionzone/CollisionShape2D
-
-func _ready():
-	# Connect the explosion kill zone
-	explosion_zone.body_entered.connect(_on_explosion_hit)
 
 func _physics_process(delta):
 	position.y -= rise_speed * delta
@@ -19,6 +14,8 @@ func _physics_process(delta):
 
 func _on_score_zone_body_entered(body):
 	if body.name == "Player":
+		player_node = body # The player is on the bomb!
+		
 		if not has_scored:
 			has_scored = true
 			get_tree().current_scene.add_platform_score(1, true)
@@ -27,43 +24,57 @@ func _on_score_zone_body_entered(body):
 			is_triggered = true
 			start_fuse()
 
+# THE SECRET WEAPON: Tell the bomb when the player jumps off!
+func _on_score_zone_body_exited(body):
+	if body.name == "Player":
+		player_node = null # The player escaped!
+
 func start_fuse():
-	# Visual warning: Flicker between Orange and Red
-	for i in range(5):
-		sprite.modulate = Color(1, 0, 0) # Red
-		await get_tree().create_timer(0.15).timeout
-		sprite.modulate = Color(1, 0.5, 0) # Orange
-		await get_tree().create_timer(0.15).timeout
+	var blinks = 3        
+	var blink_delay = 0.1
 	
-	explode()
+	# START THE FUSE SOUND!
+	$SfxFuse.play() 
+	
+	for i in range(blinks):
+		if not is_inside_tree(): return 
+		sprite.modulate = Color(1, 0, 0) 
+		await get_tree().create_timer(blink_delay).timeout
+		
+		if not is_inside_tree(): return 
+		sprite.modulate = Color(1, 0.5, 0) 
+		await get_tree().create_timer(blink_delay).timeout
+	
+	if is_inside_tree():
+		explode()
 
 func explode():
-	# The GDD says: "standing on it during explosion is instant death."
+	# 1. CUT THE FUSE SOUND AND PLAY THE BLAST!
+	$SfxFuse.stop()
+	$SfxBlast.play()
 	
-	# 1. Visually hide the platform to simulate destruction
-	sprite.visible = false
+	sprite.modulate = Color(5.0, 5.0, 5.0) 
 	
-	# 2. Turn on the lethal explosion hitbox!
-	explosion_shape.set_deferred("disabled", false)
-	
-	# 3. If they escape, reward them! (GDD Section 06: +2 points for escaping a bomb)
-	# We check if the player is NOT in the explosion zone after 0.1 seconds.
 	await get_tree().create_timer(0.1).timeout
+	if not is_inside_tree(): return
 	
-	var overlapping_bodies = explosion_zone.get_overlapping_bodies()
-	var player_died = false
-	for b in overlapping_bodies:
-		if b.name == "Player":
-			player_died = true
+	if player_node != null:
+		player_node.die("bomb") # Violent explosion death!
+	else:
+		if get_tree().current_scene.has_method("add_bonus_score"):
+			get_tree().current_scene.add_bonus_score(2)
 			
-	if not player_died:
-		# +2 Flat bonus for escaping the explosion!
-		get_tree().current_scene.add_bonus_score(2)
+	# THE PRO-TRICK: Make the bomb invisible and harmless, but DON'T delete it yet!
+	sprite.visible = false
+	$CollisionShape2D.set_deferred("disabled", true)
 	
-	# Destroy the platform completely
-	queue_free()
+	# Wait for the audio file to naturally finish playing!
+	await $SfxBlast.finished
+	
+	# NOW delete it! (No audio cropping needed!)
+	if is_inside_tree():
+		queue_free()
 
-func _on_explosion_hit(body):
-	if body.name == "Player":
-		# Instantly kill the player
-		get_tree().reload_current_scene.call_deferred()
+
+func _on_explosion_zone_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

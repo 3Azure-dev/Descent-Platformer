@@ -1,0 +1,271 @@
+[gd_scene format=3 uid="uid://bb7gr47x6aa2n"]
+
+[ext_resource type="Script" uid="uid://ujtfi6sfmnf3" path="res://Scenes and Scripts/Scripts/main_menu.gd" id="1_wf6f5"]
+[ext_resource type="Texture2D" uid="uid://csu1ayo0pilcv" path="res://Assets/UI Backgrounds/Main_Mneu.png" id="2_oye4a"]
+[ext_resource type="Texture2D" uid="uid://bof3ulvnq2ev2" path="res://Assets/Level 1/Background.png" id="3_5v171"]
+[ext_resource type="Texture2D" uid="uid://bx0tg12vkrb13" path="res://Assets/UI Backgrounds/Options_Menu.png" id="3_iaqby"]
+[ext_resource type="Texture2D" uid="uid://d2juhmcd3ssn" path="res://Assets/UI/Play .png" id="3_shi8o"]
+[ext_resource type="Texture2D" uid="uid://chihetx8q6ebu" path="res://Assets/UI/Grabber.png" id="5_5v171"]
+[ext_resource type="Texture2D" uid="uid://tobb634tfxsk" path="res://Assets/UI/Down.png" id="6_epj3g"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1nwp2"]
+texture = ExtResource("3_shi8o")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_shi8o"]
+texture = ExtResource("3_shi8o")
+
+[node name="Main_Menu" type="Control" unique_id=1418842744]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wf6f5")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=521541922]
+layout_mode = 0
+offset_right = 726.44586
+offset_bottom = 1279.4594
+rotation = 0.0014332423
+texture = ExtResource("2_oye4a")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=360760103]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 300.0
+grow_horizontal = 2
+theme_override_constants/separation = 0
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer" unique_id=468460272]
+layout_mode = 2
+theme_override_font_sizes/font_size = 120
+text = "DESCENT"
+horizontal_alignment = 1
+
+[node name="HighScoreLabel" type="Label" parent="VBoxContainer" unique_id=1570843775]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54351956, 0.67281526, 0.74157333, 1)
+theme_override_font_sizes/font_size = 30
+text = "PERSONAL BEST: 0"
+horizontal_alignment = 1
+
+[node name="MapSelector" type="HBoxContainer" parent="." unique_id=676324865]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="RuinsButton" type="Button" parent="MapSelector" unique_id=340987199]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = " The Ruins"
+icon = ExtResource("3_5v171")
+expand_icon = true
+
+[node name="ForgeButton" type="Button" parent="MapSelector" unique_id=2055121857]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "The Forge
+(Score 50)"
+
+[node name="VoidButton" type="Button" parent="MapSelector" unique_id=222324385]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "The Void
+(Score 50)"
+
+[node name="Play" type="Button" parent="." unique_id=666444528]
+custom_minimum_size = Vector2(400, 120)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -180.0
+offset_right = 4.0
+offset_bottom = -172.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxTexture_1nwp2")
+text = "Tap to Descend"
+
+[node name="OptionsButton" type="Button" parent="." unique_id=1337568300]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -208.0
+offset_top = 173.0
+offset_right = -7.0
+offset_bottom = 323.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "⚙ OPTIONS"
+
+[node name="OptionsOverlay" type="CanvasLayer" parent="." unique_id=1620716243]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="OptionsOverlay" unique_id=1483070269]
+offset_right = 726.0
+offset_bottom = 1282.0
+texture = ExtResource("3_iaqby")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsOverlay/TextureRect" unique_id=1105243569]
+custom_minimum_size = Vector2(720, 1280)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -358.0
+offset_top = -644.0
+offset_right = 362.0
+offset_bottom = 636.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="OverViewOptions" type="Label" parent="OptionsOverlay/TextureRect/VBoxContainer" unique_id=1793019653]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.67562354, 0.73742574, 0.5216405, 1)
+theme_override_font_sizes/font_size = 56
+text = "
+- SYSTEM SETTINGS -"
+horizontal_alignment = 1
+
+[node name="OverViewVolume" type="Label" parent="OptionsOverlay/TextureRect/VBoxContainer" unique_id=1410099637]
+custom_minimum_size = Vector2(400, 75)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7327271, 0.65193665, 0.92878646, 1)
+theme_override_font_sizes/font_size = 48
+text = "
+MASTER VOLUME"
+horizontal_alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="OptionsOverlay/TextureRect/VBoxContainer/OverViewVolume" unique_id=1517038360]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 0
+offset_left = 159.0
+offset_top = 88.0
+offset_right = 559.0
+offset_bottom = 288.0
+theme_override_icons/grabber = ExtResource("5_5v171")
+max_value = 1.0
+step = 0.1
+value = 1.0
+
+[node name="OverViewSensetivity" type="Label" parent="OptionsOverlay/TextureRect/VBoxContainer" unique_id=729616717]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6023509, 0.742971, 0.67937416, 1)
+theme_override_font_sizes/font_size = 48
+text = "
+TOUCH SENSITIVITY"
+horizontal_alignment = 1
+
+[node name="SesetivitySlider" type="HSlider" parent="OptionsOverlay/TextureRect/VBoxContainer/OverViewSensetivity" unique_id=1901294766]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 0
+offset_left = 270.0
+offset_top = 82.0
+offset_right = 670.0
+offset_bottom = 282.0
+theme_override_icons/grabber = ExtResource("5_5v171")
+min_value = 0.5
+max_value = 2.0
+step = 0.1
+value = 1.0
+
+[node name="OverViewAbility" type="Label" parent="OptionsOverlay/TextureRect/VBoxContainer/OverViewSensetivity" unique_id=1276106646]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 0
+offset_top = 149.0
+offset_right = 720.0
+offset_bottom = 349.0
+theme_override_colors/font_color = Color(0.67562354, 0.73742574, 0.5216405, 1)
+theme_override_font_sizes/font_size = 56
+text = "
+Choose Scorestreak"
+horizontal_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="OptionsOverlay/TextureRect/VBoxContainer/OverViewSensetivity/OverViewAbility" unique_id=2031974339]
+custom_minimum_size = Vector2(100, 200)
+layout_mode = 0
+offset_left = 158.0
+offset_top = 175.0
+offset_right = 607.0
+offset_bottom = 375.0
+theme_override_icons/arrow = ExtResource("6_epj3g")
+item_count = 3
+popup/item_0/text = "Emergency Platform (Cost: 5)"
+popup/item_0/id = 0
+popup/item_1/text = "Dead Stop (Cost: 4)"
+popup/item_1/id = 1
+popup/item_2/text = "Guide Ramp (Cost: 6)"
+popup/item_2/id = 2
+
+[node name="AbilityTrigger" type="Label" parent="OptionsOverlay/TextureRect" unique_id=1708247702]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 854.0
+offset_right = 725.0
+offset_bottom = 877.0
+
+[node name="TriggerDropdown" type="OptionButton" parent="OptionsOverlay/TextureRect/AbilityTrigger" unique_id=67898049]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 20.0
+item_count = 3
+popup/item_0/text = "Button Only"
+popup/item_0/id = 0
+popup/item_1/text = "Double Tap Only"
+popup/item_1/id = 1
+popup/item_2/text = "Button and Double Tap"
+popup/item_2/id = 2
+
+[node name="CloseandSaveButton" type="Button" parent="OptionsOverlay/TextureRect" unique_id=1185903193]
+custom_minimum_size = Vector2(10, 100)
+layout_mode = 0
+offset_left = 59.999996
+offset_top = 1150.0
+offset_right = 780.0
+offset_bottom = 1250.0
+rotation = 0.0043413267
+scale = Vector2(0.75576675, 1)
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxTexture_shi8o")
+text = "CLOSE & SAVE"
+
+[connection signal="pressed" from="MapSelector/RuinsButton" to="." method="_on_ruins_button_pressed"]
+[connection signal="pressed" from="MapSelector/ForgeButton" to="." method="_on_forge_button_pressed"]
+[connection signal="pressed" from="MapSelector/VoidButton" to="." method="_on_void_button_pressed"]
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="value_changed" from="OptionsOverlay/TextureRect/VBoxContainer/OverViewVolume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="value_changed" from="OptionsOverlay/TextureRect/VBoxContainer/OverViewSensetivity/SesetivitySlider" to="." method="_on_sensitivity_slider_value_changed"]
+[connection signal="item_selected" from="OptionsOverlay/TextureRect/VBoxContainer/OverViewSensetivity/OverViewAbility/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="OptionsOverlay/TextureRect/CloseandSaveButton" to="." method="_on_close_button_pressed"]

@@ -24,17 +24,26 @@ func _on_score_zone_body_entered(body):
 			break_apart()
 
 func break_apart():
-	# Visual warning: blink transparent
-	for i in range(5):
-		sprite.modulate.a = 0.5
-		await get_tree().create_timer(0.25).timeout
-		sprite.modulate.a = 1.0
-		await get_tree().create_timer(0.25).timeout
+	var blink_delay = 0.25 
+	
+	for i in range(25):
+		if not is_inside_tree(): return 
+		sprite.modulate.a = 0.3 
+		await get_tree().create_timer(blink_delay).timeout
 		
-	# Snap! The platform breaks.
+		if not is_inside_tree(): return 
+		sprite.modulate.a = 1.0 
+		await get_tree().create_timer(blink_delay).timeout
+		blink_delay *= 0.65 
+		
+	if not is_inside_tree(): return 
+	
+	# THE POP!
+	$SfxBreak.play()
+	
 	sprite.visible = false
 	collision_shape.set_deferred("disabled", true)
 	
-	# Wait a tiny bit then delete it completely
 	await get_tree().create_timer(1.0).timeout
-	queue_free()
+	if is_inside_tree():
+		queue_free()

@@ -9,5 +9,4 @@ func _physics_process(delta):
 
 func _on_kill_zone_body_entered(body):
 	if body.name == "Player":
-		# The Godot 4 way
-		get_tree().reload_current_scene.call_deferred()
+		body.die("spike") # Violent death!

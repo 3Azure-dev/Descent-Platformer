@@ -5,9 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://cse2xv0wc3xk6" path="res://Scenes and Scripts/Scenes/platform_data_shard.tscn" id="2_qaxx7"]
 [ext_resource type="PackedScene" uid="uid://wim1vd312aft" path="res://Scenes and Scripts/Scenes/platform_narrow.tscn" id="3_v2ik3"]
 [ext_resource type="PackedScene" uid="uid://u3csykmwkq1w" path="res://Scenes and Scripts/Scenes/platform_speed.tscn" id="4_w0l2j"]
+[ext_resource type="PackedScene" uid="uid://db0ox74tn4fxm" path="res://Scenes and Scripts/Scenes/guide_ramp.tscn" id="5_v2ik3"]
 [ext_resource type="PackedScene" uid="uid://ch064k7fer6hm" path="res://Scenes and Scripts/Scenes/player.tscn" id="6_hxpjs"]
+[ext_resource type="Texture2D" uid="uid://irawwjepkc7f" path="res://Assets/Game UI/Ceiling_Spike.png" id="7_nkuq6"]
+[ext_resource type="AudioStream" uid="uid://0o1i8cdvpss4" path="res://Assets/Sounds/TheVoid.mp3" id="8_w0l2j"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_505pi"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nkuq6"]
+size = Vector2(720, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xholq"]
 size = Vector2(720, 50)
 
 [node name="Level3" type="Node2D" unique_id=1211338279]
@@ -15,6 +21,7 @@ script = ExtResource("1_jjimm")
 platform_data_shard = ExtResource("2_qaxx7")
 platform_narrow = ExtResource("3_v2ik3")
 platform_speed = ExtResource("4_w0l2j")
+guide_ramp_scene = ExtResource("5_v2ik3")
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="." unique_id=2138820106]
 layer = -1
@@ -35,29 +42,57 @@ stretch_mode = 6
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1585500652]
 
-[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=530649207]
-offset_left = 320.0
-offset_top = -42.0
-offset_right = 393.0
-offset_bottom = 133.0
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=1214005313]
+offset_left = 318.0
+offset_top = 164.0
+offset_right = 391.0
+offset_bottom = 339.0
 theme_override_font_sizes/font_size = 128
 text = "0"
 
-[node name="CeilingZone" type="Area2D" parent="." unique_id=165205849]
-position = Vector2(357, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="CeilingZone" unique_id=1013979583]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CeilingZone" unique_id=741381028]
-position = Vector2(0, 24)
-shape = SubResource("RectangleShape2D_505pi")
-
-[node name="VoidZone" type="Area2D" parent="." unique_id=1885269195]
-position = Vector2(363, 1226)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="VoidZone" unique_id=430116627]
-position = Vector2(-1, 54)
-shape = SubResource("RectangleShape2D_505pi")
+[node name="AbilityButton" type="Button" parent="CanvasLayer" unique_id=1068513813]
+custom_minimum_size = Vector2(150, 150)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -209.0
+offset_top = -199.0
+offset_right = -18.0
+offset_bottom = -49.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Activate 
+Scorestreak"
 
 [node name="Player" parent="." unique_id=51943560 instance=ExtResource("6_hxpjs")]
 position = Vector2(360, 200)
+
+[node name="BGM" type="AudioStreamPlayer2D" parent="." unique_id=1594989565]
+stream = ExtResource("8_w0l2j")
+autoplay = true
+
+[node name="CeilingZone" type="Area2D" parent="." unique_id=2024984385]
+position = Vector2(357, -34)
+scale = Vector2(1.44, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="CeilingZone" unique_id=429617663]
+position = Vector2(0, 71)
+scale = Vector2(3.5200024, 2.0000005)
+texture = ExtResource("7_nkuq6")
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CeilingZone" unique_id=1126646373]
+position = Vector2(0, 64)
+scale = Vector2(1, 2.52)
+shape = SubResource("RectangleShape2D_nkuq6")
+
+[node name="VoidZone" type="Area2D" parent="." unique_id=1763149162]
+position = Vector2(363, 1328)
+scale = Vector2(1.44, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VoidZone" unique_id=959914822]
+position = Vector2(-1, 54)
+shape = SubResource("RectangleShape2D_xholq")
