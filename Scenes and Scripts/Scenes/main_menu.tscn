@@ -4,15 +4,26 @@
 [ext_resource type="Texture2D" uid="uid://csu1ayo0pilcv" path="res://Assets/UI Backgrounds/Main_Mneu.png" id="2_oye4a"]
 [ext_resource type="Texture2D" uid="uid://bof3ulvnq2ev2" path="res://Assets/Level 1/Background.png" id="3_5v171"]
 [ext_resource type="Texture2D" uid="uid://bx0tg12vkrb13" path="res://Assets/UI Backgrounds/Options_Menu.png" id="3_iaqby"]
-[ext_resource type="Texture2D" uid="uid://d2juhmcd3ssn" path="res://Assets/UI/Play .png" id="3_shi8o"]
-[ext_resource type="Texture2D" uid="uid://chihetx8q6ebu" path="res://Assets/UI/Grabber.png" id="5_5v171"]
+[ext_resource type="Texture2D" uid="uid://cvq0fbjx28pbr" path="res://Assets/UI/Play-button.jpeg" id="4_5853w"]
+[ext_resource type="Texture2D" uid="uid://cim0atw5n2wlk" path="res://Assets/UI/Options-button.jpeg" id="6_0cblg"]
+[ext_resource type="Texture2D" uid="uid://b5wtwm6rmk8hl" path="res://Assets/UI/grabbers-mainvol.jpeg" id="6_88pqs"]
 [ext_resource type="Texture2D" uid="uid://tobb634tfxsk" path="res://Assets/UI/Down.png" id="6_epj3g"]
+[ext_resource type="Texture2D" uid="uid://cmy5xf7q1ye5n" path="res://Assets/UI/Sliders-mainvol.jpeg" id="7_5vuat"]
+[ext_resource type="Texture2D" uid="uid://dyvfa75solcw1" path="res://Assets/UI/grabbers-touchsens.jpeg" id="8_5853w"]
+[ext_resource type="Texture2D" uid="uid://c2y62jrqio3od" path="res://Assets/UI/Sliders-touchsens.jpeg" id="9_0cblg"]
+[ext_resource type="AudioStream" uid="uid://bnlp52d5t588n" path="res://Assets/Sounds/BG Music.mp3" id="13_0cblg"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5853w"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1nwp2"]
-texture = ExtResource("3_shi8o")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rd07r"]
+texture = ExtResource("7_5vuat")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rrbuv"]
+texture = ExtResource("9_0cblg")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_shi8o"]
-texture = ExtResource("3_shi8o")
 
 [node name="Main_Menu" type="Control" unique_id=1418842744]
 layout_mode = 3
@@ -79,49 +90,46 @@ expand_icon = true
 custom_minimum_size = Vector2(200, 300)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-disabled = true
 text = "The Forge
 (Score 50)"
+icon = SubResource("CompressedTexture2D_5853w")
 
 [node name="VoidButton" type="Button" parent="MapSelector" unique_id=222324385]
 custom_minimum_size = Vector2(200, 300)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-disabled = true
 text = "The Void
 (Score 50)"
 
 [node name="Play" type="Button" parent="." unique_id=666444528]
-custom_minimum_size = Vector2(400, 120)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -180.0
-offset_right = 4.0
-offset_bottom = -172.0
+offset_left = -290.0
+offset_top = -310.0
+offset_right = 315.0
+offset_bottom = -141.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxTexture_1nwp2")
-text = "Tap to Descend"
+icon = ExtResource("4_5853w")
 
 [node name="OptionsButton" type="Button" parent="." unique_id=1337568300]
-custom_minimum_size = Vector2(200, 150)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -208.0
-offset_top = 173.0
-offset_right = -7.0
-offset_bottom = 323.0
+offset_left = -666.0
+offset_top = 244.0
+offset_right = -52.0
+offset_bottom = 424.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 32
-text = "⚙ OPTIONS"
+icon = ExtResource("6_0cblg")
 
 [node name="OptionsOverlay" type="CanvasLayer" parent="." unique_id=1620716243]
 visible = false
@@ -173,7 +181,8 @@ offset_left = 159.0
 offset_top = 88.0
 offset_right = 559.0
 offset_bottom = 288.0
-theme_override_icons/grabber = ExtResource("5_5v171")
+theme_override_icons/grabber = ExtResource("6_88pqs")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_rd07r")
 max_value = 1.0
 step = 0.1
 value = 1.0
@@ -194,7 +203,8 @@ offset_left = 270.0
 offset_top = 82.0
 offset_right = 670.0
 offset_bottom = 282.0
-theme_override_icons/grabber = ExtResource("5_5v171")
+theme_override_icons/grabber = ExtResource("8_5853w")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_rrbuv")
 min_value = 0.5
 max_value = 2.0
 step = 0.1
@@ -259,6 +269,10 @@ scale = Vector2(0.75576675, 1)
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxTexture_shi8o")
 text = "CLOSE & SAVE"
+
+[node name="BGM" type="AudioStreamPlayer2D" parent="." unique_id=2073912531]
+stream = ExtResource("13_0cblg")
+autoplay = true
 
 [connection signal="pressed" from="MapSelector/RuinsButton" to="." method="_on_ruins_button_pressed"]
 [connection signal="pressed" from="MapSelector/ForgeButton" to="." method="_on_forge_button_pressed"]

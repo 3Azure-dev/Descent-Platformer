@@ -165,4 +165,10 @@ func die(cause = "void"):
 	visible = false 
 	
 	await get_tree().create_timer(0.5).timeout
+	
+		# --- NEW: HIGH SCORE CHECK! ---
+	var current_level_score = get_tree().current_scene.score
+	if current_level_score > Global.high_score:
+		Global.high_score = current_level_score
+		Global.save_data() # Save it to the phone!
 	get_tree().reload_current_scene()

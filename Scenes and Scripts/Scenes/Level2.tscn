@@ -7,8 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://db0ox74tn4fxm" path="res://Scenes and Scripts/Scenes/guide_ramp.tscn" id="5_28pci"]
 [ext_resource type="Texture2D" uid="uid://x8hf83oatu7v" path="res://Assets/Level 2/Background.png" id="5_75ny0"]
 [ext_resource type="PackedScene" uid="uid://ch064k7fer6hm" path="res://Scenes and Scripts/Scenes/player.tscn" id="6_k6gi3"]
-[ext_resource type="Texture2D" uid="uid://irawwjepkc7f" path="res://Assets/Game UI/Ceiling_Spike.png" id="7_ynebs"]
+[ext_resource type="Texture2D" uid="uid://b122x67n60xen" path="res://Assets/Game UI/Puase.jpeg" id="7_k6gi3"]
 [ext_resource type="AudioStream" uid="uid://draqld8kso8wp" path="res://Assets/Sounds/TheForge.mp3" id="8_vqlr4"]
+[ext_resource type="Texture2D" uid="uid://dq4hrnbgsnkdn" path="res://Assets/Game UI/Level2-spike.png" id="9_ynebs"]
+[ext_resource type="PackedScene" uid="uid://comrdxhxo5fdm" path="res://pause_menu.tscn" id="11_q0uao"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ynebs"]
 size = Vector2(720, 50)
@@ -67,11 +69,19 @@ theme_override_font_sizes/font_size = 32
 text = "Activate 
 Scorestreak"
 
+[node name="PauseButton" type="Button" parent="CanvasLayer" unique_id=823836373]
+offset_left = 24.0
+offset_top = 162.0
+offset_right = 89.0
+offset_bottom = 226.0
+icon = ExtResource("7_k6gi3")
+
 [node name="Player" parent="." unique_id=51943560 instance=ExtResource("6_k6gi3")]
 position = Vector2(360, 200)
 
 [node name="BGM" type="AudioStreamPlayer2D" parent="." unique_id=204936278]
 stream = ExtResource("8_vqlr4")
+volume_db = 12.0
 autoplay = true
 
 [node name="CeilingZone" type="Area2D" parent="." unique_id=2081459996]
@@ -79,10 +89,9 @@ position = Vector2(357, -37)
 scale = Vector2(1.44, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="CeilingZone" unique_id=810217060]
-position = Vector2(0, 71)
-scale = Vector2(3.5200024, 2.0000005)
-texture = ExtResource("7_ynebs")
-flip_v = true
+position = Vector2(3.1249666, 82.25001)
+scale = Vector2(0.28746247, 0.32504973)
+texture = ExtResource("9_ynebs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CeilingZone" unique_id=2676808]
 position = Vector2(0, 64)
@@ -96,3 +105,8 @@ scale = Vector2(1.44, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VoidZone" unique_id=1527540126]
 position = Vector2(-1, 54)
 shape = SubResource("RectangleShape2D_avpl0")
+
+[node name="PauseMenu" parent="." unique_id=1437002200 instance=ExtResource("11_q0uao")]
+visible = false
+
+[connection signal="pressed" from="CanvasLayer/PauseButton" to="." method="_on_pause_button_pressed"]

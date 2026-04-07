@@ -7,8 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://u3csykmwkq1w" path="res://Scenes and Scripts/Scenes/platform_speed.tscn" id="4_w0l2j"]
 [ext_resource type="PackedScene" uid="uid://db0ox74tn4fxm" path="res://Scenes and Scripts/Scenes/guide_ramp.tscn" id="5_v2ik3"]
 [ext_resource type="PackedScene" uid="uid://ch064k7fer6hm" path="res://Scenes and Scripts/Scenes/player.tscn" id="6_hxpjs"]
-[ext_resource type="Texture2D" uid="uid://irawwjepkc7f" path="res://Assets/Game UI/Ceiling_Spike.png" id="7_nkuq6"]
+[ext_resource type="Texture2D" uid="uid://b122x67n60xen" path="res://Assets/Game UI/Puase.jpeg" id="7_hxpjs"]
 [ext_resource type="AudioStream" uid="uid://0o1i8cdvpss4" path="res://Assets/Sounds/TheVoid.mp3" id="8_w0l2j"]
+[ext_resource type="Texture2D" uid="uid://bc4v1unxfkrxe" path="res://Assets/Game UI/Level3-spike.png" id="9_nkuq6"]
+[ext_resource type="PackedScene" uid="uid://comrdxhxo5fdm" path="res://pause_menu.tscn" id="11_shair"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nkuq6"]
 size = Vector2(720, 50)
@@ -67,11 +69,19 @@ theme_override_font_sizes/font_size = 32
 text = "Activate 
 Scorestreak"
 
+[node name="PauseButton" type="Button" parent="CanvasLayer" unique_id=271740735]
+offset_left = 14.0
+offset_top = 138.0
+offset_right = 79.0
+offset_bottom = 202.0
+icon = ExtResource("7_hxpjs")
+
 [node name="Player" parent="." unique_id=51943560 instance=ExtResource("6_hxpjs")]
 position = Vector2(360, 200)
 
 [node name="BGM" type="AudioStreamPlayer2D" parent="." unique_id=1594989565]
 stream = ExtResource("8_w0l2j")
+volume_db = -8.0
 autoplay = true
 
 [node name="CeilingZone" type="Area2D" parent="." unique_id=2024984385]
@@ -79,9 +89,9 @@ position = Vector2(357, -34)
 scale = Vector2(1.44, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="CeilingZone" unique_id=429617663]
-position = Vector2(0, 71)
-scale = Vector2(3.5200024, 2.0000005)
-texture = ExtResource("7_nkuq6")
+position = Vector2(3.1250014, 74.74999)
+scale = Vector2(0.31877664, 1.0241381)
+texture = ExtResource("9_nkuq6")
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CeilingZone" unique_id=1126646373]
@@ -96,3 +106,8 @@ scale = Vector2(1.44, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VoidZone" unique_id=959914822]
 position = Vector2(-1, 54)
 shape = SubResource("RectangleShape2D_xholq")
+
+[node name="PauseMenu" parent="." unique_id=1437002200 instance=ExtResource("11_shair")]
+visible = false
+
+[connection signal="pressed" from="CanvasLayer/PauseButton" to="." method="_on_pause_button_pressed"]

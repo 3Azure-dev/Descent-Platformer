@@ -15,9 +15,12 @@ func _ready():
 	$OptionsOverlay/TextureRect/VBoxContainer/OverViewVolume/VolumeSlider.value = Global.volume
 	$OptionsOverlay/TextureRect/VBoxContainer/OverViewSensetivity/SesetivitySlider.value = Global.touch_sensitivity
 	$OptionsOverlay/TextureRect/VBoxContainer/OverViewSensetivity/OverViewAbility/OptionButton.selected = Global.selected_ability - 1 # Arrays start at 0!
-	vbox.get_node("TriggerDropdown").selected = Global.trigger_mode
+	$OptionsOverlay/TextureRect/AbilityTrigger/TriggerDropdown.selected = Global.trigger_mode
 	
-	# World Unlocks... (keep your existing unlock code here)
+		# THE FIX: Force the buttons to connect to the script automatically!
+	$MapSelector/RuinsButton.pressed.connect(_on_btn_world_1_pressed)
+	$MapSelector/ForgeButton.pressed.connect(_on_btn_world_2_pressed)
+	$MapSelector/VoidButton.pressed.connect(_on_btn_world_3_pressed)
 
 # --- PLAY & WORLD SELECT ---
 func _on_play_pressed():
@@ -35,11 +38,13 @@ func _on_options_button_pressed():
 	$OptionsOverlay.visible = true # Show menu
 
 func _on_close_button_pressed():
-	$OptionsOverlay.visible = false # Hide menu
+	$OptionsOverlay.visible = false
+	Global.save_data() # Hide menu
 
 # Triggered when Volume HSlider is dragged
 func _on_volume_slider_value_changed(value):
 	Global.volume = value
+	Global.apply_volume()
 	# Later we will tie this to the actual AudioServer!
 
 # Triggered when Sensitivity HSlider is dragged
@@ -53,3 +58,15 @@ func _on_option_button_item_selected(index):
 
 func _on_trigger_dropdown_item_selected(index):
 	Global.trigger_mode = index
+
+func _on_btn_world_1_pressed():
+	selected_world = 1
+	$MapSelector/RuinsButton.text = "PLAY: THE RUINS"
+
+func _on_btn_world_2_pressed():
+	selected_world = 2
+	$MapSelector/ForgeButton.text = "PLAY: THE FORGE"
+
+func _on_btn_world_3_pressed():
+	selected_world = 3
+	$MapSelector/VoidButton.text = "PLAY: THE VOID"

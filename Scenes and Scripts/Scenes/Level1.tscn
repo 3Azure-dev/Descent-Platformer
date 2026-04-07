@@ -7,8 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://bof3ulvnq2ev2" path="res://Assets/Level 1/Background.png" id="5_f412u"]
 [ext_resource type="PackedScene" uid="uid://db0ox74tn4fxm" path="res://Scenes and Scripts/Scenes/guide_ramp.tscn" id="5_yhbs5"]
 [ext_resource type="PackedScene" uid="uid://ch064k7fer6hm" path="res://Scenes and Scripts/Scenes/player.tscn" id="6_yb8je"]
-[ext_resource type="Texture2D" uid="uid://irawwjepkc7f" path="res://Assets/Game UI/Ceiling_Spike.png" id="7_wkh4p"]
-[ext_resource type="AudioStream" uid="uid://bnlp52d5t588n" path="res://Assets/Sounds/BG Music.mp3" id="8_86gk8"]
+[ext_resource type="Texture2D" uid="uid://bjpaymu00bwkx" path="res://Assets/Game UI/level1-spike.png" id="7_wkh4p"]
+[ext_resource type="Texture2D" uid="uid://b122x67n60xen" path="res://Assets/Game UI/Puase.jpeg" id="7_yb8je"]
+[ext_resource type="AudioStream" uid="uid://cpf8dwxm4ubus" path="res://Assets/Sounds/TheRuins.mp3" id="9_wkh4p"]
+[ext_resource type="PackedScene" uid="uid://comrdxhxo5fdm" path="res://pause_menu.tscn" id="11_5x3qc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_505pi"]
 size = Vector2(720, 50)
@@ -64,15 +66,21 @@ theme_override_font_sizes/font_size = 32
 text = "Activate 
 Scorestreak"
 
+[node name="PauseButton" type="Button" parent="CanvasLayer" unique_id=1632449796]
+offset_left = 19.0
+offset_top = 171.0
+offset_right = 84.0
+offset_bottom = 235.0
+icon = ExtResource("7_yb8je")
+
 [node name="CeilingZone" type="Area2D" parent="." unique_id=165205849]
 position = Vector2(357, -2)
 scale = Vector2(1.44, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="CeilingZone" unique_id=1013979583]
-position = Vector2(0, 71)
-scale = Vector2(3.5200024, 2.0000005)
+position = Vector2(3.1249886, 78.50002)
+scale = Vector2(0.28802234, 0.27579355)
 texture = ExtResource("7_wkh4p")
-flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CeilingZone" unique_id=741381028]
 position = Vector2(0, 64)
@@ -91,7 +99,11 @@ shape = SubResource("RectangleShape2D_505pi")
 position = Vector2(360, 200)
 
 [node name="BGM" type="AudioStreamPlayer2D" parent="." unique_id=1535482281]
-stream = ExtResource("8_86gk8")
+stream = ExtResource("9_wkh4p")
 autoplay = true
 
+[node name="PauseMenu" parent="." unique_id=1437002200 instance=ExtResource("11_5x3qc")]
+visible = false
+
 [connection signal="pressed" from="CanvasLayer/AbilityButton" to="." method="_on_ability_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseButton" to="." method="_on_pause_button_pressed"]

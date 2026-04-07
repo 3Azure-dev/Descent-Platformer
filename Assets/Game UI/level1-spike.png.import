@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chihetx8q6ebu"
-path="res://.godot/imported/Grabber.png-120058f14e5d1b8540c70444a0cf20a1.ctex"
+uid="uid://bjpaymu00bwkx"
+path="res://.godot/imported/level1-spike.png-29c01440c7bf645fce89d0b8356098e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/Grabber.png"
-dest_files=["res://.godot/imported/Grabber.png-120058f14e5d1b8540c70444a0cf20a1.ctex"]
+source_file="res://Assets/Game UI/level1-spike.png"
+dest_files=["res://.godot/imported/level1-spike.png-29c01440c7bf645fce89d0b8356098e8.ctex"]
 
 [params]
 

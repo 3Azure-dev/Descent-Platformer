@@ -193,3 +193,7 @@ func _on_ability_button_pressed():
 				
 		# Update the UI score
 		$CanvasLayer/ScoreLabel.text = str(score)
+
+
+func _on_pause_button_pressed() -> void:
+	$PauseMenu.toggle_pause()
